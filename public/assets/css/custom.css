@@ -1,0 +1,29 @@
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+.bg-color{
+    background-color: #F5F5F5;
+}
+
+.sidebar{
+    width: 19vw;
+    height: 100vh;
+    position: fixed;
+    padding-top: 6%;
+    top: 0;
+    left: 0;
+    box-shadow: 8px 10px 40px rgba(0,0,0,.5);
+    background: rgba(0,0,0,.295);
+    backdrop-filter: blur(5px);
+    border-left: 1px solid rgba(0,0,0,.2);
+    border-top: 1px solid rgba(0,0,0,.2);
+}
+
+.main-bar{
+    margin-left: 19%;
+}
+
+a.active{
+    background-color: rgba(163, 182, 197,.5) !important;
+}
