@@ -46,8 +46,6 @@ class SalesController extends Controller
             $sale->month_id = date('n');
             $sale->user_id = auth()->id();
             $sale->save();
-
-            // $id = auth()->id();
                 
             return redirect('/sales')->with('success','Total Sales Added!');        
     }
@@ -68,8 +66,6 @@ class SalesController extends Controller
         $request->validate([
             'total_inclusive_sales'=> 'required',
         ]);
-        $total_vat = new Total;
-        $purchase = Purchase::all();
 
         $sale = Sale::find($id);
         $sale->total_inclusive_sales = $request->input('total_inclusive_sales');
@@ -87,7 +83,6 @@ class SalesController extends Controller
     {
         $sale = Sale::find($id);
         $sale->delete();
-        // $allSales = Sale::all();
            
         return redirect('/sales')->with('success', 'Total Sales Deleted');
     }

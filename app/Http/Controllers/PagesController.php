@@ -117,10 +117,15 @@ class PagesController extends Controller
         $user = User::find(1);
         $my_invoice = Invoice::find($id);
 
-        Mail::to($my_invoice->email)->send(new invoiceMail($my_invoice));
-        $user->notify(new InvoiceMade());
+        if($this->isOnline()){
 
-        return redirect('/payment');
+            Mail::to($my_invoice->email)->send(new invoiceMail($my_invoice));
+            $user->notify(new InvoiceMade());
+            return redirect('/payment');
+
+        }else{
+            return redirect()->back()->with('error', 'Check your internet connection');
+        }   
     } 
 
     public function send_receipt($id){
@@ -143,9 +148,14 @@ class PagesController extends Controller
 
         $my_receipt = User::find($id)->Receipt()->latest()->first();
 
-        Mail::to($my_receipt->email)->send(new ReceiptMail($my_receipt));
+        if($this->isOnline()){
 
-        return redirect('/admin/users')->with('success', 'Receipt Sent');
+            Mail::to($my_receipt->email)->send(new ReceiptMail($my_receipt));
+            return redirect('/admin/users')->with('success', 'Receipt Sent');
+
+        }else{
+            return redirect()->back()->with('error', 'Check your internet connection');
+        }
     }
 
 
@@ -158,5 +168,13 @@ class PagesController extends Controller
             'purchases'=> $purchases,
             'sales' => $sales,
         ]);
+    }
+
+    public function isOnline($site = "https://www.google.com"){
+        if(@fopen($site, 'r')){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

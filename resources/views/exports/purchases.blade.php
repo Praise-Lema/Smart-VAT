@@ -33,6 +33,7 @@
             <td></td>
             <th><strong>TOTAL PURCHASES</strong></th>
             <td></td>
+            <td></td>
             <th><strong>{{number_format($purchase->sum('amount_inclusive'),2)}}</strong></th>
             <th><strong>{{number_format($purchase->sum('amount_exclusive'),2)}}</strong></th>
             <th><strong>{{number_format($purchase->sum('vat'),2)}}</strong></th>
@@ -52,6 +53,7 @@
         <tr>
             <td></td>
             <th><strong>TOTAL SALES</strong></th>
+            <td></td>
             <td></td>
             <th><strong>{{number_format($sales->sum('total_inclusive_sales'),2)}}</strong></th>
             <th><strong>{{number_format($sales->sum('total_exclusive_sales'),2)}}</strong></th>

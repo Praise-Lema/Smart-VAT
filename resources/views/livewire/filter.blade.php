@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="container my-3">
+    <div class="my-3">
         <div class="d-flex justify-content-between">
             <form action="" class="" class="d-flex">
                 <div class="d-flex gap-4 row">
@@ -48,134 +48,140 @@
             <h3 class="text-dark text-center ">Purchase Details</h3>
             <hr style="margin: auto; width: 8%;">
             {{-- Purchases table details --}}
-            <table class="table table-rounded table-responsive table-secondary table-striped table-hover my-2">
-                <tr>
-                    <th>s/n</th>
-                    <th>Date</th>
-                    <th>Supplier Name</th>
-                    <th>Goods Description</th>
-                    <th>URL</th>
-                    <th>Amount Inlcusive <small>(Tshs)</small></th>
-                    <th>Amount Exclusive <small>(Tshs)</small></th>
-                    <th>VAT <small>(Tshs)</small></th>
-                </tr>
-
-                <tbody class="table-group-divider">
-                    @if(count($purchases) > 0)
-                        @foreach ($purchases as $i => $purchase)
-                            <tr>
-                                <td>{{$i + 1}}</td>
-                                <td wire:model = "purchases">{{$purchase->created_at}}</td>
-                                <td wire:model = "purchases">{{$purchase->supplier_name}}</td>
-                                <td wire:model = "purchases">{{$purchase->goods_description}}</td>
-                                <td wire:model = "purchases">{{$purchase->url}}</td>
-                                <td wire:model = "purchases">{{number_format($purchase->amount_inclusive,2)}}</td>
-                                <td wire:model = "purchases">{{number_format($purchase->amount_exclusive,2)}}</td>
-                                <td wire:model = "purchases">{{number_format($purchase->vat,2)}}</td>
-                            </tr>
-                        @endforeach
-                    @else 
-                        <tr>
-                            <td></td>
-                            <td>No Purchase Records Inserted</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>    
-                    @endif
-                </tbody>
-                <tfoot class="table-group-divider table-dark">
-                    
-                    @if (count($purchases) > 0)
+            <div class="table-responsive-md container-fluid">
+                <table class="table table-rounded table-secondary table-striped table-hover my-2 table-width">
                     <tr>
-                        <td></td>
-                        <th>Total Purchases</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <th>{{number_format($purchases->sum('amount_inclusive'),2)}}</th>
-                        <th>{{number_format($purchases->sum('amount_exclusive'),2)}}</th>
-                        <th>{{number_format($purchases->sum('vat'),2)}}</th>
+                        <th>s/n</th>
+                        <th>Date</th>
+                        <th>Supplier Name</th>
+                        <th>Goods Description</th>
+                        <th>URL</th>
+                        <th>Amount Inlcusive <small>(Tshs)</small></th>
+                        <th>Amount Exclusive <small>(Tshs)</small></th>
+                        <th>VAT <small>(Tshs)</small></th>
                     </tr>
-                    @else
+
+                    <tbody class="table-group-divider">
+                        @if(count($purchases) > 0)
+                            @foreach ($purchases as $i => $purchase)
+                                <tr>
+                                    <td>{{$i + 1}}</td>
+                                    <td wire:model = "purchases">{{$purchase->created_at}}</td>
+                                    <td wire:model = "purchases">{{$purchase->supplier_name}}</td>
+                                    <td wire:model = "purchases">{{$purchase->goods_description}}</td>
+                                    <td wire:model = "purchases">{{$purchase->url}}</td>
+                                    <td wire:model = "purchases">{{number_format($purchase->amount_inclusive,2)}}</td>
+                                    <td wire:model = "purchases">{{number_format($purchase->amount_exclusive,2)}}</td>
+                                    <td wire:model = "purchases">{{number_format($purchase->vat,2)}}</td>
+                                </tr>
+                            @endforeach
+                        @else 
+                            <tr>
+                                <td></td>
+                                <td>No Purchase Records Inserted</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>    
+                        @endif
+                    </tbody>
+                    <tfoot class="table-group-divider table-dark">
+                        
+                        @if (count($purchases) > 0)
                         <tr>
                             <td></td>
-                            <th>Total Purchase</th>
+                            <th>Total Purchases</th>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <th>{{number_format($purchases->sum('amount_inclusive'),2)}}</th>
+                            <th>{{number_format($purchases->sum('amount_exclusive'),2)}}</th>
+                            <th>{{number_format($purchases->sum('vat'),2)}}</th>
                         </tr>
-                    @endif   
-                </tfoot>
-            </table>
+                        @else
+                            <tr>
+                                <td></td>
+                                <th>Total Purchase</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        @endif   
+                    </tfoot>
+                </table>
+            </div>
         </div>        
 
         <div class="my-5">
             <h3 class="text-dark text-center">Sales Details</h3>
             <hr style="margin: auto; width: 8%;">
             {{-- Sales table details --}}
-            <table class="table table-rounded table-responsive table-secondary table-striped table-hover my-2">
-                <tr>
-                    <th>s/n</th>
-                    <th>Total Inclusive Sales</th>
-                    <th>Total Exclusive Sales</th>
-                    <th>Total Sales VAT </th>
-                    <th>Month</th>
-                </tr>
+            <div class="table-responsive-md container-fluid">
+                <table class="table table-rounded table-secondary table-striped table-hover my-2 table-width">
+                    <tr>
+                        <th>s/n</th>
+                        <th>Total Inclusive Sales</th>
+                        <th>Total Exclusive Sales</th>
+                        <th>Total Sales VAT </th>
+                        <th>Month</th>
+                    </tr>
 
-                <tbody class="table-group-divider">
-                    @if (count($sales) > 0)
-                        @foreach ($sales as $i => $sale)
+                    <tbody class="table-group-divider">
+                        @if (count($sales) > 0)
+                            @foreach ($sales as $i => $sale)
+                                <tr>
+                                    <td>{{$i + 1}}</td>
+                                    <td>{{number_format($sale->total_inclusive_sales,2)}}</td>
+                                    <td>{{number_format($sale->total_exclusive_sales,2)}}</td>
+                                    <td>{{number_format($sale->total_sales_vat,2)}}</td>
+                                    <td>{{$sale->Month}}</td>
+                                </tr>
+                            @endforeach
+                        @else
                             <tr>
-                                <td>{{$i + 1}}</td>
-                                <td>{{number_format($sale->total_inclusive_sales,2)}}</td>
-                                <td>{{number_format($sale->total_exclusive_sales,2)}}</td>
-                                <td>{{number_format($sale->total_sales_vat,2)}}</td>
-                                <td>{{$sale->Month}}</td>
+                                <td>No Sales Records</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{date('F')}}</td>
                             </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td>No Sales Records</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>{{date('F')}}</td>
-                        </tr>
-                    @endif                
-                </tbody>
-            </table>
+                        @endif                
+                    </tbody>
+                </table>
+            </div>
         </div>
         
         <div class="my-5">
             <h3 class="text-dark text-center my-2">VAT Difference Details</h3>
             <hr style="margin: auto; width: 8%;">
             {{-- VAT Difference table --}}
-            <table class="table table-rounded table-responsive table-secondary table-striped table-hover my-2">
-                <tr>
-                    <th>s/n</th>
-                    <th>Total Sales VAT</th>
-                    <th>Total Purchases VAT</th>
-                    <th>VAT Difference</th>
-                    <th>Month</th>
-                </tr>
+            <div class="table-responsive-md container-fluid">
+                <table class="table table-rounded table-secondary table-striped table-hover my-2 table-width">
+                    <tr>
+                        <th>s/n</th>
+                        <th>Total Sales VAT</th>
+                        <th>Total Purchases VAT</th>
+                        <th>VAT Difference</th>
+                        <th>Month</th>
+                    </tr>
 
-                <tbody class="table-group-divider">
-                        <tr>
-                            <td></td>
-                            <td>{{number_format($sales->sum('total_sales_vat'),2)}}</td>
-                            <td>{{number_format($purchases->sum('vat'),2)}}</td>
-                            <td>{{number_format((($sales->sum('total_sales_vat')) - ($purchases->sum('vat'))),2)}}</td>
-                            <td>{{$month}}</td>
-                        </tr>        
-                </tbody>
-            </table>
+                    <tbody class="table-group-divider">
+                            <tr>
+                                <td></td>
+                                <td>{{number_format($sales->sum('total_sales_vat'),2)}}</td>
+                                <td>{{number_format($purchases->sum('vat'),2)}}</td>
+                                <td>{{number_format((($sales->sum('total_sales_vat')) - ($purchases->sum('vat'))),2)}}</td>
+                                <td>{{$month}}</td>
+                            </tr>        
+                    </tbody>
+                </table>
+            </div>
         </div>    
     </div>
 </div>

@@ -1,12 +1,11 @@
-<div class="sidebar">
-    
+<div class="sidebar">  
     <div class="card bg-dark-subtle">
         <div class="card-header">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="fa fa-globe fa-xl me-2"></span> My Companies</a>
                     <ul class="dropdown-menu">
-                        @if (auth()->user()->company()->count() > 0)
+                        @if (auth()->user()->companies()->count() > 0)
                             @foreach (auth()->user()->company as $company)
                                 <li>
                                     <a class="dropdown-item @if(auth()->user()->current_company_id == $company->id) text-dark fw-bold active @endif" href="/company/change/{{$company->id}}">
@@ -21,7 +20,7 @@
                         @endif
                         @if(count(auth()->user()->company) < auth()->user()->company_no)
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/company/create"><span class="fa fa-add me-2"></span>Add Company</a></li>
+                            {{-- <li><a class="dropdown-item" href="/company/create"><span class="fa fa-add me-2"></span>Add Company</a></li> --}}
                         @endif
                     </ul>
                 </li>

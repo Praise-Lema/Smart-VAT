@@ -25,8 +25,10 @@ class StatsOverview extends BaseWidget
         }
 
         return [
-            Card::make('Number Of Users', count($users)),
-            Card::make('Number Of Companies', count($companies)),
+            Card::make('Number Of Users', count($users))
+            ->chart([7, 10, 21, 14, 17, 28, 6, 12])
+            ->color('success'),
+            // Card::make('Number Of Companies', count($companies)),
             Card::make('Month', date('F')),
         ];
     }

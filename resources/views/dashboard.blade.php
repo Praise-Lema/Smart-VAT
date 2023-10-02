@@ -3,7 +3,6 @@
 @section('content')
     @include('partials.sidebar')
 
-    {{-- {{dd(Auth::user()->current_company_id)}} --}}
     <div class="main-bar">
         <div class="container">
             <h1 class="text-center text-dark">Dashboard</h1>
@@ -19,7 +18,7 @@
 
             <div class="container mx-2 d-flex flex-wrap my-2">
                 {{-- Card section --}}
-                <div class="card border-0 m-2 bg-danger-subtle shadow" style="width: 45%;">
+                <div class="card card-width border-0 m-2 bg-danger-subtle shadow">
                     <div class="card-header">
                         <h2>Total Purchases VAT</h2>
                     </div>
@@ -43,7 +42,7 @@
                 {{-- End card section --}}
 
                 {{-- Card section --}}
-                <div class="card m-2 border-0 bg-success-subtle shadow" style="width: 45%;">
+                <div class="card card-width m-2 border-0 bg-success-subtle shadow">
                     <div class="card-header">
                         <h2>Total Sales VAT</h2>
                     </div>
@@ -67,7 +66,7 @@
                 {{-- End card section --}}
                 
                 {{-- Card section --}}
-                <div class="card m-2 border-0 bg-primary-subtle shadow" style="width: 92%;">
+                <div class="card m-2 remarks-card-width border-0 bg-primary-subtle shadow">
                     <div class="card-header d-flex align-items-center justify-content-between"> 
                         <h2>Remarks</h2>
                         <h5>Month: {{date('F')}}</h5>

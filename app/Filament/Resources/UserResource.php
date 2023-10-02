@@ -2,19 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
-use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use App\Models\Role;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
+use App\Filament\Resources\UserResource\RelationManagers;
+use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 
 class UserResource extends Resource
 {
@@ -26,23 +29,30 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                // Forms\Components\FileUpload::make('profile_pic'),
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('email')->email()->required(),
+                Forms\Components\TextInput::make('phone')->tel(),
                 Forms\Components\TextInput::make('password')->password()->required()->hiddenOn('edit'),
-                Forms\Components\Select::make('status')->options([
-                    '1' => 'Active',
-                    '0' => 'Inactive',
-                ]),
+                // Forms\Components\Select::make('role_id')->options(Role::all()->pluck('name', 'id'))->disablePlaceholderSelection(),               
                 Forms\Components\Select::make('has_paid')->options([
                     '1' => 'Paid',
                     '0' => 'Not Paid',
-                ]),
-                Forms\Components\Select::make('package_id')->options([
+                ])->disablePlaceholderSelection(),
+                Forms\Components\Select::make('package_id')->label('Package')->options([
                     '1' => 'Basic',
                     '2' => 'Standard',
                     '3' => 'Pro', 
                     '4' => 'Premium',
-                ]),
+                ])->disablePlaceholderSelection(),
+                // Forms\Components\Select::make('current_company_id')->label('Current Company')->relationship('company', 'name')->disablePlaceholderSelection(),
+                Forms\Components\Select::make('reg_by_yana')->options([
+                    '1' => 'Yes',
+                    '0' => 'No',
+                ])->disablePlaceholderSelection(),
+                Forms\Components\Toggle::make('status')
+                ->onColor('success'),
+                // Forms\Components\FileUpload::make('company_pic'),
             ]);
     }
 
@@ -50,6 +60,8 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                // ImageColumn::make('profile_pic')->label('Profile Pic')
+                // ->defaultImageUrl(url('assets/images/user-icon.png')),
                 TextColumn::make('name'),
                 TextColumn::make('email'),
                 BadgeableColumn::make('name')
@@ -61,9 +73,24 @@ class UserResource extends Resource
                     ->color('success')
                     ->visible(fn ($record): bool => $record->has_paid ?? false),
                 ]),
-                TextColumn::make('status'),
-                TextColumn::make('has_paid'),
-                TextColumn::make('package_id'),
+                TextColumn::make('status')->enum([
+                    1 => 'Active',
+                    0 => 'Inactive',
+                ]),
+                TextColumn::make('has_paid')->enum([
+                    1 => 'Yes',
+                    0 => 'No',
+                ]),
+                TextColumn::make('package_id')->label('Package')->enum([
+                    1 => 'Basic',
+                    2 => 'Standard',
+                    3 => 'Pro',
+                    4 => 'Premium',
+                ]),
+                // TextColumn::make('role_id'),
+                TextColumn::make('package_due_date')->date(),
+                TextColumn::make('last_login_time'),
+                TextColumn::make('last_login_ip'),
             ])
             ->filters([
                 //
@@ -82,14 +109,15 @@ class UserResource extends Resource
         if($user->role_id == 3){
             return User::where('reg_by_yana', 1);
         }else{
-            return User::where('status', 1)->orWhere('status', 0);
+            return User::where('reg_by_yana', '>=', 0);
         }
     }
     
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\CompanyRelationManager::class,
+            // RelationManagers\PackageRelationManager::class,
         ];
     }
     

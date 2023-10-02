@@ -2,7 +2,7 @@
 @include('partials.sidebar')
 
 @section('content')
-<div class="container" style="margin-left: 15%">
+<div class="container profile-card">
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="mb-2">
@@ -14,7 +14,7 @@
                 <div class="py-3 text-center"><h2>Edit Company</h2></div>
 
                 <div class="card-body shadow py-5">
-                    <form action="/company/{{$company->id}}" method="POST">
+                    <form action="/company/{{$company->id}}" method="POST" enctype="multipart/form-data">
                         {{method_field('PUT')}}
                         {{ csrf_field() }}
                         
@@ -43,7 +43,14 @@
                                         <option value="{{$region->name}}">{{$region->name}}</option>
                                     @endforeach    
                                 </select>
-                                {{-- <input id="region" type="text" class="form-control" name="region" value="{{$company->region}}" required autocomplete="region"> --}}
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label for="company_pic" class="col-md-4 col-form-label text-md-end">Company Logo</label>
+    
+                            <div class="col-md-6">
+                                <input id="company_pic" type="file" class="form-control" name="company_pic" value="{{$company->company_pic}}">
                             </div>
                         </div>
 

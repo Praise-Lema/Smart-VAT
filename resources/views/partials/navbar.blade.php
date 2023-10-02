@@ -17,7 +17,8 @@
     {{-- <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"> --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800&display=swap" rel="stylesheet">
 
     {{-- Favicon --}}
     <link rel="shortcut icon" href="{{asset('pos.png')}}" type="image/x-icon">
@@ -36,8 +37,10 @@
                 <a class="navbar-brand text-light" href="{{ url('/') }}">
                     <img src="{{asset('pos.png')}}" width="40" height="26" alt=""> {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" style="color:#fff;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon">
+                        <i class="fas fa-bars" style="color:#fff; font-size:24px;"></i>
+                    </span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -47,10 +50,31 @@
                     @else
                     <ul class="navbar-nav me-auto mx-5">
                         <li class="nav-item">
-                            <a href="/purchase" class="nav-link text-light">Purchases</a>
+                            <a href="/dashboard" class="nav-link text-light d-md-none">Dashboard</a>
                         </li>
+
+                        <li class="nav-item dropdown d-md-none">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Purchases
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" data-bs-theme="dark" aria-labelledby="navbarDropdown">
+                                <a href="/purchase" class="dropdown-item">Purchases Table</a>
+                                <a href="/purchase/create" class="dropdown-item">Add Purchase</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown d-md-none">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Sales
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" data-bs-theme="dark" aria-labelledby="navbarDropdown">
+                                <a href="/sales" class="dropdown-item">Sales Info</a>
+                                <a href="/sales/create" class="dropdown-item">Add Total Sales</a>
+                            </div>
+                        </li>
+
                         <li class="nav-item">
-                            <a href="/sales" class="nav-link text-light">Sales</a>
+                            <a href="/monthly-analysis" class="nav-link text-light d-md-none">Monthly Analysis</a>
                         </li>
                     </ul>
                     @endguest
@@ -92,8 +116,9 @@
                                 @endif
                                 <hr class="dropdown-divider">
                                 @if(count(auth()->user()->company) < auth()->user()->company_no)
-                                    <a class="dropdown-item" href="/company/create"><span class="fa fa-add me-2"></span>Add Company</a>
+                                    {{-- <a class="dropdown-item" href="/company/create"><span class="fa fa-add me-2"></span>Add Company</a> --}}
                                 @endif
+                                
                             </div>
                         </li>
 
@@ -105,7 +130,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" data-bs-theme="dark" aria-labelledby="navbarDropdown">
                                     <a href="/profile" class="dropdown-item">Profile</a>
-                                    <a href="/company/create" class="dropdown-item">Create Company</a>
+                                    @if(count(auth()->user()->company) < auth()->user()->company_no)
+                                        {{-- <a href="/company/create" class="dropdown-item">Create Company</a> --}}
+                                    @endif
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

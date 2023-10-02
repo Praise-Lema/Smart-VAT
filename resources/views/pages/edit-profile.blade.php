@@ -2,7 +2,7 @@
 @include('partials.sidebar')
 
 @section('content')
-<div class="container" style="margin-left: 15%">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="mb-2">
@@ -39,7 +39,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-end">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="tel" class="form-control" name="phone" value="{{$user->phone}}" required autocomplete="phone">
+                                <input id="phone" type="tel" accept="[0-9]" class="form-control" name="phone" value="{{$user->phone}}" required autocomplete="phone">
                             </div>
                         </div>
 

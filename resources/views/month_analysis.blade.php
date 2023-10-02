@@ -7,7 +7,7 @@
         <div class="container">
             <h1 class="text-center text-dark">Monthly Analysis</h1>
             <hr style="margin: auto; width: 8%;">
-            <div class="container my-3">
+            <div class="my-3">
                 @livewire('filter', [
                     'purchases' => $purchases,
                     'sales' => $sales

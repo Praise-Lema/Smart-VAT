@@ -2,7 +2,7 @@
 @include('partials.sidebar')
 
 @section('content')
-<div class="container" style="margin-left: 15%">
+<div class="container profile-card">
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="container">

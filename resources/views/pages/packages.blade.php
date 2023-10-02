@@ -9,6 +9,7 @@
 
         <div class="row">
             <h4 class="text-center text-secondary my-2">Choose your Company's/Business Package</h4>
+            
         </div>
 
         <div class="row">
@@ -20,9 +21,9 @@
                                 <h1 class="card-title">{{$package->name}}</h1>
                             </div>
                             <div class="card-body px-4">
-                                <h5 class="card-text py-2"><i class="fa-solid fa-circle-check me-2"></i>Number of companies: {{$package->company_no}}</h5>
-                                <h5 class="card-text py-2"><i class="fa-solid fa-circle-check me-2"></i>Number of users: {{$package->users_no}}</h5>
-                                <h5 class="card-text py-2"><i class="fa-solid fa-circle-check me-2"></i>Duration: {{$package->duration}} Months</h5>
+                                <h5 class="card-text py-2"><i class="fa-solid fa-circle-check me-2"></i>Number of companies: 1</h5>
+                                <h5 class="card-text py-2"><i class="fa-solid fa-circle-check me-2"></i>Number of users: 2</h5>
+                                <h5 class="card-text py-2 fw-semibold"><i class="fa-solid fa-circle-check me-2"></i>Duration: {{$package->duration}} Months</h5>
                                 <h2 class="card-text text-center pt-3">TZS {{number_format($package->price)}}/=</h2>
                             </div>
 
@@ -34,7 +35,11 @@
                                 </form>
                             </div>
                         </div>
-                    @endforeach                
+                    @endforeach
+                    <div class="row my-4">
+                        <h4 class="text-center my-2">Extra Company: <i class="fa-solid fa-circle-check me-2"></i> TZS 30,000/year <i class="fa-solid fa-circle-check me-2"></i> TZS 5,000/month </h4>
+                        <h4 class="text-center my-2">Extra User: <i class="fa-solid fa-circle-check me-2"></i> TZS 40,000/year <i class="fa-solid fa-circle-check me-2"></i> TZS 7,000/month </h4>
+                    </div>                
             </div>    
         </div>
     </div>

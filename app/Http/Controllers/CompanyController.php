@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckCompanyNoAllowed;
 use App\Models\User;
 use App\Models\Region;
 use App\Models\Company;
@@ -11,6 +12,7 @@ class CompanyController extends Controller
 {
     public function __construct()
     {
+        $this->middleware([CheckCompanyNoAllowed::class])->except(['edit', 'update', 'changeCompany']);
         $this->middleware('auth');
     }
     /**
@@ -83,6 +85,9 @@ class CompanyController extends Controller
         $company->name = $request->input('name');
         $company->address = $request->input('address');
         $company->region = $request->input('region');
+        if($request->hasFile('company_pic')) {
+            $company->company_pic = $request->file('company_pic')->store('company_pics', 'public');
+        }
         $company->save();
         
         return redirect('/profile')->with('success','Company Edited');

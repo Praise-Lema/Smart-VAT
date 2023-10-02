@@ -4,18 +4,18 @@
     @include('partials.sidebar')
 
     <div class="main-bar">
-        <div class="container px-5">
-            <div class="container bg-secondary-subtle p-4">
+        <div class="profile-container">
+            <div class="profile-inner-container bg-secondary-subtle ">
                 <h1 class="text-center mb-4 text-dark">Profile</h1>
 
-                <div class="container">
+                <div class="container-md">
                     <div class="card shadow border-0">
                         <div class="card-header py-2">
                             <h2>Personal info:</h2>
                         </div>
 
-                        <div class="card-body d-flex jusitfy-content-center align-items-center" style="width: 75%;">
-                            <img src="{{$user->profile_pic ? asset('storage/'.$user->profile_pic): asset('assets/images/user-icon.png')}}" class="card-img-top mx-4 h-50 rounded-circle" style="width: 35%;" alt="">
+                        <div class="card-body d-flex flex-wrap jusitfy-content-center align-items-center user-card">
+                            <img src="{{$user->profile_pic ? asset('storage/'.$user->profile_pic): asset('assets/images/user-icon.png')}}" class="h-50 rounded-circle user-img">
 
                             <div class="">
                                 <h2 class="card-title text-center">Username: {{$user->name}}</h2>
@@ -35,8 +35,8 @@
                             <h2>Company Info:</h2>
                         </div>
 
-                        <div class="card-body d-flex jusitfy-content-between align-items-center">
-                            <img src="{{asset('assets/images/img2.png')}}" class="card-img-top h-50 rounded-circle" style="width: 40%;" alt="">
+                        <div class="card-body d-flex flex-wrap jusitfy-content-between align-items-center">
+                            <img src="{{$company->company_pic ? asset('storage/'.$company->company_pic) : asset('assets/images/img2.png')}}" class="h-50 rounded-circle company-logo">
 
                             <div class="">
                                 <h3 class="card-title text-center">Company Name: {{$company->name}}</h3>

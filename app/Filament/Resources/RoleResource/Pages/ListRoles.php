@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\MonthResource\Pages;
+namespace App\Filament\Resources\RoleResource\Pages;
 
-use App\Filament\Resources\MonthResource;
+use App\Filament\Resources\RoleResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListMonths extends ListRecords
+class ListRoles extends ListRecords
 {
-    protected static string $resource = MonthResource::class;
+    protected static string $resource = RoleResource::class;
 
     protected function getActions(): array
     {

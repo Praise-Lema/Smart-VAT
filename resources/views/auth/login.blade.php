@@ -21,7 +21,7 @@
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ 'Wrong Email or Password' }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -68,7 +68,7 @@
                                     </a>
                                 @endif
 
-                                    <a href="/register" class="link-body-emphasis mx-3">Register here</a>
+                                    {{-- <a href="/register" class="link-body-emphasis mx-3">Register here</a> --}}
                                 </div>    
                             </div>    
                         </div>

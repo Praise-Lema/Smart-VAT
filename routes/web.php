@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
-use App\Models\User;
-use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -13,8 +11,8 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\UsersExportController;
 use App\Http\Controllers\PurchasesExportController;
+use App\Http\Middleware\CheckCompanyNoAllowed;
 use App\Http\Middleware\EnsurePackageIsSelected;
 use App\Http\Middleware\EnsureStatusIsActive;
 use App\Http\Middleware\RedirectIfAlreadyPaid;
@@ -63,6 +61,6 @@ Route::get('verify-payment', [PagesController::class, 'verify'])->middleware([Re
 Route::resource('company', CompanyController::class)->middleware([EnsureStatusIsActive::class, EnsurePackageIsSelected::class]);
 Route::resource('purchase',PurchaseController::class)->middleware([EnsureStatusIsActive::class, EnsurePackageIsSelected::class]);
 Route::resource('sales', SalesController::class)->middleware([EnsureStatusIsActive::class, EnsurePackageIsSelected::class]);
-Route::resource('profile', ProfileController::class)->middleware([EnsureStatusIsActive::class, EnsurePackageIsSelected::class]);
+Route::resource('profile', ProfileController::class)->middleware(['auth', EnsureStatusIsActive::class, EnsurePackageIsSelected::class]);
 
 // Route::get('/users/export', [UsersExportController::class, 'export']);

@@ -18,17 +18,17 @@
 
         {{ html()->div()->class('form-group my-4')->open()}}
             {{ html()->label('Amount Inclusive')->class('form-label') }}
-            {{ html()->text('amount_inclusive')->attributes(['placeholder'=>'TZS', 'value'=>$inclusiveInput, 'wire:model'=> 'inclusiveInput', 'wire:keyup'=>'update', 'class'=>'form-control']) }}
+            {{ html()->number('amount_inclusive')->attributes(['placeholder'=>'TZS', 'value'=>$inclusiveInput, 'wire:model'=> 'inclusiveInput', 'wire:keyup'=>'update', 'class'=>'form-control']) }}
         {{ html()->div()->close() }}
 
         {{ html()->div()->class('form-group my-4')->open()}}
             {{ html()->label('Amount Exlcusive')->class('form-label') }}
-            {{ html()->text('amount_exclusive')->attributes(['placeholder'=>'TZS', 'value'=>$exclusiveInput, 'wire:model'=> 'exclusiveInput', 'class'=>'form-control']) }}
+            {{ html()->number('amount_exclusive')->attributes(['placeholder'=>'TZS', 'value'=>$exclusiveInput, 'wire:model'=> 'exclusiveInput', 'class'=>'form-control', 'readonly']) }}
         {{ html()->div()->close() }}
 
         {{ html()->div()->class('form-group my-4')->open()}}
             {{ html()->label('VAT')->class('form-label') }}
-            {{ html()->number('vat')->attributes(['placeholder'=>'TZS', 'value'=>$vatInput, 'wire:model'=> 'vatInput', 'class'=>'form-control']) }}
+            {{ html()->number('vat')->attributes(['placeholder'=>'TZS', 'value'=>$vatInput, 'wire:model'=> 'vatInput', 'class'=>'form-control', 'readonly']) }}
         {{ html()->div()->close() }}
 
         {{ html()->div()->class('form-group my-4')->open()}}

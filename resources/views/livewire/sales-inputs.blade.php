@@ -4,17 +4,17 @@
 
         {{ html()->div()->class('form-group my-4')->open()}}
             {{ html()->label('Total Inclusive Sales')->class('form-label') }}
-            {{ html()->text('total_inclusive_sales')->attributes(['placeholder'=>'TZS', 'value'=>$totalInclusive, 'wire:model'=> 'totalInclusive', 'wire:keyup'=>'update', 'class'=>'form-control']) }}
+            {{ html()->number('total_inclusive_sales')->attributes(['placeholder'=>'TZS', 'value'=>$totalInclusive, 'wire:model'=> 'totalInclusive', 'wire:keyup'=>'update', 'class'=>'form-control']) }}
         {{ html()->div()->close() }}
 
         {{ html()->div()->class('form-group my-4')->open()}}
             {{ html()->label('Total Exlcusive Sales')->class('form-label') }}
-            {{ html()->text('total_exclusive_sales')->attributes(['placeholder'=>'TZS', 'value'=>$totalExclusive, 'wire:model'=> 'totalExclusive', 'class'=>'form-control']) }}
+            {{ html()->number('total_exclusive_sales')->attributes(['placeholder'=>'TZS', 'value'=>$totalExclusive, 'wire:model'=> 'totalExclusive', 'class'=>'form-control', 'readonly']) }}
         {{ html()->div()->close() }}
 
         {{ html()->div()->class('form-group my-4')->open()}}
             {{ html()->label('Total Sales VAT')->class('form-label') }}
-            {{ html()->number('total_sales_vat')->attributes(['placeholder'=>'TZS', 'value'=>$totalVat,  'wire:model'=> 'totalVat', 'class'=>'form-control']) }}
+            {{ html()->number('total_sales_vat')->attributes(['placeholder'=>'TZS', 'value'=>$totalVat,  'wire:model'=> 'totalVat', 'class'=>'form-control', 'readonly']) }}
         {{ html()->div()->close() }}
 
         {{ html()->div()->class('form-group my-4')->open()}}
