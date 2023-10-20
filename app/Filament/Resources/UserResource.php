@@ -23,7 +23,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
@@ -32,6 +32,7 @@ class UserResource extends Resource
                 // Forms\Components\FileUpload::make('profile_pic'),
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('email')->email()->required(),
+                Forms\Components\TextInput::make('email_verified_at')->disabled(),
                 Forms\Components\TextInput::make('phone')->tel(),
                 Forms\Components\TextInput::make('password')->password()->required()->hiddenOn('edit'),
                 // Forms\Components\Select::make('role_id')->options(Role::all()->pluck('name', 'id'))->disablePlaceholderSelection(),               
@@ -49,7 +50,7 @@ class UserResource extends Resource
                 Forms\Components\Select::make('reg_by_yana')->options([
                     '1' => 'Yes',
                     '0' => 'No',
-                ])->disablePlaceholderSelection(),
+                ])->disablePlaceholderSelection()->default('1'),
                 Forms\Components\Toggle::make('status')
                 ->onColor('success'),
                 // Forms\Components\FileUpload::make('company_pic'),
@@ -64,6 +65,7 @@ class UserResource extends Resource
                 // ->defaultImageUrl(url('assets/images/user-icon.png')),
                 TextColumn::make('name'),
                 TextColumn::make('email'),
+                TextColumn::make('email_verified_at'),
                 BadgeableColumn::make('name')
                 ->badges([
                     Badge::make('status')->label('Active')
@@ -86,6 +88,10 @@ class UserResource extends Resource
                     2 => 'Standard',
                     3 => 'Pro',
                     4 => 'Premium',
+                ]),
+                TextColumn::make('reg_by_yana')->label('Reg By Yana')->enum([
+                    1 => 'Yes',
+                    0 => 'No',
                 ]),
                 // TextColumn::make('role_id'),
                 TextColumn::make('package_due_date')->date(),
@@ -120,6 +126,7 @@ class UserResource extends Resource
             // RelationManagers\PackageRelationManager::class,
         ];
     }
+    
     
     public static function getPages(): array
     {

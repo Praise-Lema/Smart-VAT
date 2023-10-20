@@ -18,9 +18,9 @@ class PackageResource extends Resource
 {
     protected static ?string $model = Package::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-folder-open';
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static bool $shouldRegisterNavigation = true;
 
 
     public static function form(Form $form): Form
@@ -32,9 +32,9 @@ class PackageResource extends Resource
                 Forms\Components\TextInput::make('duration')->required(),
                 Forms\Components\TextInput::make('users_no')->required(),
                 Forms\Components\TextInput::make('company_no')->required(),
-                Forms\Components\Select::make('color')
-                ->options(['danger', 'warning', 'primary', 'success'])
-                ->disablePlaceholderSelection(),
+                // Forms\Components\Select::make('color')
+                // ->options(['danger', 'warning', 'primary', 'success'])
+                // ->disablePlaceholderSelection(),
             ]);
     }
 
@@ -44,10 +44,10 @@ class PackageResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('price'),
-                TextColumn::make('duration'),
+                TextColumn::make('duration')->label('Duration(Months)'),
                 TextColumn::make('users_no'),
                 TextColumn::make('company_no'),
-                TextColumn::make('color'),
+                // TextColumn::make('color'),
             ])
             ->filters([
                 //

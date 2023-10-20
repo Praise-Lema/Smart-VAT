@@ -77,4 +77,12 @@ class ProfileController extends Controller
         }   
         return redirect('/admin/users');
     }
+
+    public function verify_user_email($id){
+        $user = User::find($id);
+        $user->email_verified_at = NOW();
+        $user->save();
+
+        return redirect('/admin/users');
+    }
 }

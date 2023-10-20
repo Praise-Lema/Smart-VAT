@@ -14,11 +14,11 @@ class Roles extends Seeder
     public function run(): void
     {
         $Roles = [
-            // ['name' => 'Super_admin',],
+            ['name' => 'Super_admin',],
             ['name' => 'Yana_admin',],
-            // ['name' => 'Admin',],
-            // ['name' => 'Auditor',],
-            // ['name' => 'Seller',]
+            ['name' => 'Admin',],
+            ['name' => 'Auditor',],
+            ['name' => 'Seller',]
         ];
 
         foreach($Roles as $Role){

@@ -8,6 +8,8 @@ use Filament\Tables;
 use App\Models\Region;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
+use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\UserResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -20,6 +22,7 @@ class CompanyRelationManager extends RelationManager
 
     public static function form(Form $form): Form
     {
+        
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
@@ -29,9 +32,11 @@ class CompanyRelationManager extends RelationManager
                 Forms\Components\Select::make('region')
                     ->options(Region::all()->pluck('name', 'name'))
                     ->disablePlaceholderSelection(),
-                    Forms\Components\Select::make('User.name')->label('User')->multiple()
+                    // Forms\Components\TextInput::make('user_id')->label('User')
+                    // ->default(fn ($record) => {$user} ?? 0),        
+                    Forms\Components\Select::make('User.name')->label('User')
                     ->options(User::all()->pluck('name', 'id'))
-                    ->disablePlaceholderSelection(),        
+                    ->disablePlaceholderSelection(),
             ]);
     }
 

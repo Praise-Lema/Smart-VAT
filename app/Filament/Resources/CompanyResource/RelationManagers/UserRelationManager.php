@@ -46,7 +46,7 @@ class UserRelationManager extends RelationManager
                     Forms\Components\Select::make('reg_by_yana')->options([
                         '1' => 'Yes',
                         '0' => 'No'
-                    ])->disablePlaceholderSelection(),
+                    ])->disablePlaceholderSelection()->default('1'),
                     Forms\Components\Select::make('current_company_id')->options(Company::all()->pluck('name', 'id'))->disablePlaceholderSelection(),
             ]);
     }

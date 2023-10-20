@@ -133,6 +133,10 @@
                                     @if(count(auth()->user()->company) < auth()->user()->company_no)
                                         {{-- <a href="/company/create" class="dropdown-item">Create Company</a> --}}
                                     @endif
+
+                                    @if(auth()->user()->email == 'praiselemmah@gmail.com' || auth()->user()->email == 'info@yana.africa')
+                                        <a href="/admin" class="dropdown-item">Admin Panel</a>
+                                    @endif
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

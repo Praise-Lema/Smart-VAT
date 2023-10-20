@@ -50,6 +50,7 @@ class CompanyController extends Controller
         $company->name = $request->input('name');
         $company->address = $request->input('address');
         $company->region = $request->input('region');
+        $company->user_id = auth()->id();
         $company->save();
         
         $company->User()->attach([auth()->id() => [
