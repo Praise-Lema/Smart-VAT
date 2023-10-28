@@ -1,7 +1,8 @@
 <div class="container">
     <div class="my-3">
         <div class="d-flex justify-content-between">
-            <form action="" class="" class="d-flex">
+            <form action="/monthly-analysis/export" method="post" class="d-flex">
+                {{csrf_field()}}
                 <div class="d-flex gap-4 row">
                          {{-- Filter By Month --}}
                     <div class="col-auto">
@@ -31,17 +32,19 @@
                         </select>
                     </div>   
                 </div>                                    
-            </form>
+            
 
-            <div class="mt-3">
+            <div class="mt-3" style="position:absolute; right: 3%;">
                 <div class="dropdown">
-                    <a class="btn btn-dark bg-gradient dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-file-export me-1"></i>Export Report</a>
+                    <a class="btn btn-dark bg-gradient dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-file-export me-1"></i>Export Month Report</a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#"><i class="fa fa-download me-2"></i>Download</a></li>
+                        <li><input type="submit" class="dropdown-item" value="Download"></li>
+                      {{-- <li><a class="dropdown-item" href="/monthly-analysis/export"><i class="fa fa-download me-2"></i>Download</a></li> --}}
                       {{-- <li><a class="dropdown-item" href="#"><i class="fa fa-share-alt me-2"></i>Share via Email</a></li> --}}
                     </ul>
                 </div>
             </div>
+        </form>
         </div>
 
         <div class="mb-5">
@@ -59,6 +62,7 @@
                         <th>Amount Inlcusive <small>(Tshs)</small></th>
                         <th>Amount Exclusive <small>(Tshs)</small></th>
                         <th>VAT <small>(Tshs)</small></th>
+                        <th>Action</th>
                     </tr>
 
                     <tbody class="table-group-divider">
@@ -73,12 +77,21 @@
                                     <td wire:model = "purchases">{{number_format($purchase->amount_inclusive,2)}}</td>
                                     <td wire:model = "purchases">{{number_format($purchase->amount_exclusive,2)}}</td>
                                     <td wire:model = "purchases">{{number_format($purchase->vat,2)}}</td>
+                                    <td class="d-flex">
+                                        <a href="/purchase/{{$purchase->id}}/edit" class="text-success"><span class="fas fa-edit"></span></a>
+                                        <form action="/purchase/{{$purchase->id}}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{method_field('DELETE')}}
+                                            <button type="submit" value="" class="fas fa-trash text-danger border-0 bg-transparent"></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         @else 
                             <tr>
                                 <td></td>
                                 <td>No Purchase Records Inserted</td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -100,11 +113,13 @@
                             <th>{{number_format($purchases->sum('amount_inclusive'),2)}}</th>
                             <th>{{number_format($purchases->sum('amount_exclusive'),2)}}</th>
                             <th>{{number_format($purchases->sum('vat'),2)}}</th>
+                            <th></th>
                         </tr>
                         @else
                             <tr>
                                 <td></td>
                                 <th>Total Purchase</th>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -130,6 +145,7 @@
                         <th>Total Exclusive Sales</th>
                         <th>Total Sales VAT </th>
                         <th>Month</th>
+                        <th>Action</th>
                     </tr>
 
                     <tbody class="table-group-divider">
@@ -141,6 +157,14 @@
                                     <td>{{number_format($sale->total_exclusive_sales,2)}}</td>
                                     <td>{{number_format($sale->total_sales_vat,2)}}</td>
                                     <td>{{$sale->Month}}</td>
+                                    <td class="d-flex">
+                                        <a href="/sales/{{$sale->id}}/edit" class="text-success"><span class="fas fa-edit"></span></a>
+                                        <form action="sales/{{$sale->id}}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{method_field('DELETE')}}
+                                            <button type="submit" value="" class="fas fa-trash text-danger border-0 bg-transparent"></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
@@ -150,6 +174,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>{{date('F')}}</td>
+                                <td></td>
                             </tr>
                         @endif                
                     </tbody>

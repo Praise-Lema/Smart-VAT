@@ -16,6 +16,7 @@ use App\Http\Middleware\CheckCompanyNoAllowed;
 use App\Http\Middleware\RedirectIfAlreadyPaid;
 use App\Http\Middleware\EnsurePackageIsSelected;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\MonthlyExportController;
 use App\Http\Controllers\PurchasesExportController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -50,6 +51,7 @@ Route::get('dashboard', [PagesController::class, 'dashboard'])->middleware(['aut
 Route::get('monthly-analysis', [PagesController::class, 'analysis'])->middleware([EnsureStatusIsActive::class, EnsurePackageIsSelected::class, 'verified']);
 
 Route::get('/purchase/export', [PurchasesExportController::class, 'export'])->middleware([EnsureStatusIsActive::class, EnsurePackageIsSelected::class, 'verified']);
+Route::post('/monthly-analysis/export', [MonthlyExportController::class, 'export'])->middleware([EnsureStatusIsActive::class, EnsurePackageIsSelected::class, 'verified']);
 
 Route::get('company/change/{companyId}',[CompanyController::class, 'changeCompany']);
 Route::get('/packages', [PagesController::class, 'packages'])->middleware([RedirectIfAlreadyPaid::class, 'verified']);

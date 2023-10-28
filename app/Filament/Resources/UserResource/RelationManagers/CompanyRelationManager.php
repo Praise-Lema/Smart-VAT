@@ -22,6 +22,9 @@ class CompanyRelationManager extends RelationManager
 
     public static function form(Form $form): Form
     {
+
+        $url = url()->previous();
+        $user_id = substr($url, 32, 1);
         
         return $form
             ->schema([
@@ -32,11 +35,11 @@ class CompanyRelationManager extends RelationManager
                 Forms\Components\Select::make('region')
                     ->options(Region::all()->pluck('name', 'name'))
                     ->disablePlaceholderSelection(),
-                    // Forms\Components\TextInput::make('user_id')->label('User')
-                    // ->default(fn ($record) => {$user} ?? 0),        
-                    Forms\Components\Select::make('User.name')->label('User')
-                    ->options(User::all()->pluck('name', 'id'))
-                    ->disablePlaceholderSelection(),
+                    Forms\Components\TextInput::make('user_id')->label('User')
+                    ->default($user_id)->hidden(),        
+                    // Forms\Components\Select::make('User.name')->label('User')
+                    // ->options(User::all()->pluck('name', 'id'))
+                    // ->disablePlaceholderSelection(),
             ]);
     }
 

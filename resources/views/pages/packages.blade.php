@@ -22,7 +22,8 @@
                             </div>
                             <div class="card-body px-4">
                                 <h5 class="card-text py-2"><i class="fa-solid fa-circle-check me-2"></i>Number of companies: 1</h5>
-                                <h5 class="card-text py-2"><i class="fa-solid fa-circle-check me-2"></i>Number of users: 2</h5>
+                                <h5 class="card-text py-2"><i class="fa-solid fa-circle-check me-2"></i>Number of users: 1</h5>
+                                <h5 class="card-text py-2"><i class="fa-solid fa-circle-check me-2"></i>Free Training</h5>
                                 <h5 class="card-text py-2 fw-semibold"><i class="fa-solid fa-circle-check me-2"></i>Duration: {{$package->duration}} Months</h5>
                                 <h2 class="card-text text-center pt-3">TZS {{number_format($package->price)}}/=</h2>
                             </div>

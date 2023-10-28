@@ -12,6 +12,8 @@ class Package extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'price', 'duration', 'users_no', 'company_no'];
+
     public function User(): BelongsTo
     {
         return $this->belongsTo(User::class);

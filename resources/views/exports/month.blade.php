@@ -34,9 +34,9 @@
             <th><strong>TOTAL PURCHASES</strong></th>
             <td></td>
             <td></td>
-            <th><strong>{{number_format($purchases->sum('amount_inclusive'),2)}}</strong></th>
-            <th><strong>{{number_format($purchases->sum('amount_exclusive'),2)}}</strong></th>
-            <th><strong>{{number_format($purchases->sum('vat'),2)}}</strong></th>
+            <td><strong>{{number_format($purchases->sum('amount_inclusive'),2)}}</strong></td>
+            <td><strong>{{number_format($purchases->sum('amount_exclusive'),2)}}</strong></td>
+            <td><strong>{{number_format($purchases->sum('vat'),2)}}</strong></td>
             <td></td>
         </tr>
     </tfoot>
@@ -83,11 +83,11 @@
             <td></td>
             <td></td>
             <td>REMARKS</td>
-            @if (($sales->sum('total_sales_vat')) > ($purchases->sum('vat')))
-                <td>Pay</td> 
-            @else
-                <td>Refund</td>
-            @endif
+                @if (($sales->sum('total_sales_vat')) > ($purchases->sum('vat')))
+                   <td>Pay</td> 
+                @else
+                    <td>Refund</td>
+                @endif
         </tr>
     </tfoot>
 </table>
