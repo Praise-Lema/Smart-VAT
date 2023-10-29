@@ -100,7 +100,7 @@ class CompanyController extends Controller
     }
 
     public function changeCompany($companyId){
-        $company = auth()->user()->company()->findOrFail($companyId);
+        $company = auth()->user()->companies()->findOrFail($companyId);
         auth()->user()->update(['current_company_id' => $companyId]);
 
         return redirect('/dashboard');

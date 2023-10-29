@@ -21,6 +21,31 @@ class UserRelationManager extends RelationManager
 
     public static function form(Form $form): Form
     {
+
+        $url = url()->previous();
+
+        // Testing
+        // if(substr($url, 36, 1) == '/'){
+        //     $company_id = substr($url, 35, 1);
+        // }else if(substr($url, 37, 1) == '/'){
+        //     $company_id = substr($url, 35, 2);
+        // }else if(substr($url, 38, 1) == '/'){
+        //     $company_id = substr($url, 35, 3);
+        // }else{
+        //     $company_id = substr($url, 35, 4);
+        // }
+
+        // Production
+        if(substr($url, 37, 1) == '/'){
+            $company_id = substr($url, 36, 1);
+        }else if(substr($url, 38, 1) == '/'){
+            $company_id = substr($url, 36, 2);
+        }else if(substr($url, 39, 1) == '/'){
+            $company_id = substr($url, 36, 3);
+        }else{
+            $company_id = substr($url, 36, 4);
+        }
+
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
@@ -41,13 +66,17 @@ class UserRelationManager extends RelationManager
                         '3' => 'Pro', 
                         '4' => 'Premium',
                     ])->disablePlaceholderSelection()->hiddenOn('create'),
-                Forms\Components\Toggle::make('status')
-                    ->onColor('success'),
+                    Forms\Components\Select::make('Role')->options([
+                        '1' => 'Admin',
+                        '2' => 'Auditor',
+                    ])->disablePlaceholderSelection()->default('2'),
                     Forms\Components\Select::make('reg_by_yana')->options([
                         '1' => 'Yes',
                         '0' => 'No'
                     ])->disablePlaceholderSelection()->default('1'),
-                    Forms\Components\Select::make('current_company_id')->options(Company::all()->pluck('name', 'id'))->disablePlaceholderSelection(),
+                    Forms\Components\Toggle::make('status')
+                    ->onColor('success'),
+                    Forms\Components\TextInput::make('current_company_id')->default($company_id)->disabled(),
             ]);
     }
 
@@ -71,7 +100,10 @@ class UserRelationManager extends RelationManager
                     3 => 'Pro',
                     4 => 'Premium',
                 ]),
-                // TextColumn::make('role_id'),
+                TextColumn::make('Role')->enum([
+                    "1" => 'Admin',
+                    "2" => 'Auditor',
+                ]),
                 TextColumn::make('package_due_date')->date(),
                 TextColumn::make('last_login_time'),
                 TextColumn::make('last_login_ip'),

@@ -103,7 +103,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" data-bs-theme="dark" aria-labelledby="navbarDropdown">
-                                @if (auth()->user()->company()->count() > 0)
+                                {{-- @if (auth()->user()->company()->count() > 0)
                                     @foreach (auth()->user()->company as $company)
                                         <a href="/company/change/{{$company->id}}" class="dropdown-item @if(auth()->user()->current_company_id == $company->id) fw-bold active @endif">
                                             @if(auth()->user()->current_company_id == $company->id) 
@@ -113,11 +113,19 @@
                                              {{$company->name}}
                                         </a>
                                     @endforeach
+                                @endif --}}
+                                @if (auth()->user()->companies()->count() > 0)
+                                    @foreach (auth()->user()->companies as $company)
+                                        <a href="/company/change/{{$company->id}}" class="dropdown-item @if(auth()->user()->current_company_id == $company->id) fw-bold active @endif">
+                                            @if(auth()->user()->current_company_id == $company->id) 
+                                                <span class="position-static shadow-sm me-1 badge rounded-pill bg-success text-success" style="font-size:7px;">1   
+                                                </span>
+                                            @endif
+                                             {{$company->name}}
+                                        </a>
+                                    @endforeach
                                 @endif
-                                <hr class="dropdown-divider">
-                                @if(count(auth()->user()->company) < auth()->user()->company_no)
-                                    {{-- <a class="dropdown-item" href="/company/create"><span class="fa fa-add me-2"></span>Add Company</a> --}}
-                                @endif
+                                
                                 
                             </div>
                         </li>
@@ -129,7 +137,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" data-bs-theme="dark" aria-labelledby="navbarDropdown">
-                                    <a href="/profile" class="dropdown-item">Profile</a>
+                                    <a href="/profile" class="dropdown-item">Profile - <em>@if (auth()->user()->Role == 1) Admin @else Auditor @endif</em></a>
                                     @if(count(auth()->user()->company) < auth()->user()->company_no)
                                         {{-- <a href="/company/create" class="dropdown-item">Create Company</a> --}}
                                     @endif

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Company extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'user_id','region'];  
+    protected $fillable = ['name', 'user_id','region', 'address', 'company_pic'];  
 
     public function Purchase():HasMany
     {

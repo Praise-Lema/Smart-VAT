@@ -124,7 +124,7 @@ class PagesController extends Controller
             return redirect('/payment');
 
         }else{
-            return redirect()->back()->with('error', 'Check your internet connection');
+            return redirect('/payment')->with('error', 'Check your internet connection');
         }   
     } 
 

@@ -21,6 +21,7 @@ class PurchaseController extends Controller
 
     public function create()
     {
+        // dd(auth()->user()->Role);
         return view('purchase.create');
     }
 

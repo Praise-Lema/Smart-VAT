@@ -81,8 +81,8 @@
 
         <tr>
             <td></td>
+            <td><strong>REMARKS</strong></td>
             <td></td>
-            <td>REMARKS</td>
                 @if (($sales->sum('total_sales_vat')) > ($purchases->sum('vat')))
                    <td>Pay</td> 
                 @else

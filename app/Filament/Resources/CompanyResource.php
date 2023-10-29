@@ -32,13 +32,14 @@ class CompanyResource extends Resource
                 ->options(Region::all()->pluck('name', 'name'))
                 ->disablePlaceholderSelection(),
                 Forms\Components\TextInput::make('address'),
-                // Forms\Components\Select::make('user_id')
-                //     ->multiple()
-                //     ->relationship('User', 'name')
-                //     ->disablePlaceholderSelection(),   
-                Forms\Components\Select::make('User.name')->label('User')
-                ->options(User::all()->pluck('name', 'id'))
-                ->disablePlaceholderSelection(),
+                Forms\Components\Select::make('user_id')
+                    ->multiple()
+                    ->relationship('User', 'name')
+                    ->options(User::all()->pluck('name', 'id'))
+                    ->disablePlaceholderSelection(),   
+                // Forms\Components\Select::make('User.name')->label('User')
+                // ->options(User::all()->pluck('name', 'id'))
+                // ->disablePlaceholderSelection(),
             ]);
     }
 

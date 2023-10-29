@@ -22,9 +22,31 @@ class CompanyRelationManager extends RelationManager
 
     public static function form(Form $form): Form
     {
-
         $url = url()->previous();
-        $user_id = substr($url, 32, 1);
+
+        // Testing Enviroment
+        // if(substr($url, 32, 1) == '/') {
+        //     $user_id = substr($url, 31, 1);
+        // }else if(substr($url, 33, 1) == '/'){
+        //     $user_id = substr($url, 31, 2); // Testing
+        // }else if(substr($url, 34, 1) == '/'){
+        //     $user_id = substr($url, 31, 3);
+        // }else{
+        //     $user_id = substr($url, 31, 4);
+        // }
+
+        // Production
+        if(substr($url, 33, 1) == '/') {
+            $user_id = substr($url, 32, 1);
+        }else if(substr($url, 34, 1) == '/'){
+            $user_id = substr($url, 32, 2); // Testing
+            // $user_id = substr($url, 32, 1); Production
+        }else if(substr($url, 35, 1) == '/'){
+            $user_id = substr($url, 32, 3);
+        }else{
+            $user_id = substr($url, 32, 4);
+        }
+        
         
         return $form
             ->schema([
@@ -34,9 +56,10 @@ class CompanyRelationManager extends RelationManager
                 Forms\Components\TextInput::make('address'),
                 Forms\Components\Select::make('region')
                     ->options(Region::all()->pluck('name', 'name'))
+                    ->default('Dar es salaam')
                     ->disablePlaceholderSelection(),
                     Forms\Components\TextInput::make('user_id')->label('User')
-                    ->default($user_id)->hidden(),        
+                    ->default($user_id)->disabled(),        
                     // Forms\Components\Select::make('User.name')->label('User')
                     // ->options(User::all()->pluck('name', 'id'))
                     // ->disablePlaceholderSelection(),

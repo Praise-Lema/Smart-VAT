@@ -81,12 +81,12 @@
 
         <tr>
             <td></td>
+            <td><strong>REMARKS</strong></td>
             <td></td>
-            <td>REMARKS</td>
             @if (($sales->sum('total_sales_vat')) > ($purchases->sum('vat')))
-                <td>Pay</td> 
+                <td><strong>Pay</strong></td> 
             @else
-                <td>Refund</td>
+                <td><strong>Refund</strong></td>
             @endif
         </tr>
     </tfoot>

@@ -20,6 +20,7 @@
                             <div class="">
                                 <h2 class="card-title text-center">Username: {{$user->name}}</h2>
                                 <h4 class="card-text text-center">Phone: {{$user->phone}}</h4>
+                                <h4 class="card-text text-center">Role: @if (auth()->user()->Role == 1) Admin @else Auditor @endif </h4>
                                 <p class="card-text text-center">Email: {{$user->email}}</p>
 
                                 <div class="container d-flex justify-content-center p-2">
@@ -44,7 +45,9 @@
                                 <p class="card-text text-center">Region: {{$company->region}}</p>
 
                                 <div class="container d-flex justify-content-center p-2">
-                                    <a href="/company/{{$company->id}}/edit" class="btn btn-outline-success mx-2">Update Company Profile</a>
+                                    @if (auth()->user()->Role == '1')
+                                        <a href="/company/{{$company->id}}/edit" class="btn btn-outline-success mx-2">Update Company Profile</a>
+                                    @endif
                                 </div>
                             </div>       
                         </div>

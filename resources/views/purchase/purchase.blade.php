@@ -30,7 +30,9 @@
                         <th>Amount Inlcusive <small>(Tshs)</small></th>
                         <th>Amount Exclusive <small>(Tshs)</small></th>
                         <th>VAT <small>(Tshs)</small></th>
-                        <th>Action</th>
+                        @if (auth()->user()->Role == 1)
+                            <th>Action</th>
+                        @endif
                     </tr>
 
                     <tbody class="table-group-divider">
@@ -45,14 +47,16 @@
                                     <td>{{number_format($purchase->amount_inclusive,2)}}</td>
                                     <td>{{number_format($purchase->amount_exclusive,2)}}</td>
                                     <td>{{number_format($purchase->vat,2)}}</td>
-                                    <td class="d-flex">
-                                        <a href="/purchase/{{$purchase->id}}/edit" class="text-success"><span class="fas fa-edit"></span></a>
-                                        <form action="/purchase/{{$purchase->id}}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{method_field('DELETE')}}
-                                            <button type="submit" value="" class="fas fa-trash text-danger border-0 bg-transparent"></button>
-                                        </form>
-                                    </td>
+                                    @if (auth()->user()->Role == 1)
+                                        <td class="d-flex">
+                                            <a href="/purchase/{{$purchase->id}}/edit" class="text-success"><span class="fas fa-edit"></span></a>
+                                            <form action="/purchase/{{$purchase->id}}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{method_field('DELETE')}}
+                                                <button type="submit" value="" class="fas fa-trash text-danger border-0 bg-transparent"></button>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         @else
@@ -65,24 +69,28 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                @if (auth()->user()->Role == 1)
+                                    <td></td>
+                                @endif
                             </tr>    
                         @endif
                     </tbody>
                     <tfoot class="table-group-divider table-dark">
                         
                         @if (count($purchases) > 0)
-                        <tr>
-                            <td></td>
-                                    <th>Total Purchases</th>
+                            <tr>
+                                <td></td>
+                                <th>Total Purchases</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <th>{{number_format($purchases->sum('amount_inclusive'),2)}}</th>
+                                <th>{{number_format($purchases->sum('amount_exclusive'),2)}}</th>
+                                <th>{{number_format($purchases->sum('vat'),2)}}</th>
+                                @if (auth()->user()->Role == 1)
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <th>{{number_format($purchases->sum('amount_inclusive'),2)}}</th>
-                                    <th>{{number_format($purchases->sum('amount_exclusive'),2)}}</th>
-                                    <th>{{number_format($purchases->sum('vat'),2)}}</th>
-                                    <td></td>
-                        </tr>
+                                @endif
+                            </tr>
                         @else
                             <tr>
                                 <td></td>
@@ -93,13 +101,14 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                @if (auth()->user()->Role == 1)
+                                    <td></td>
+                                @endif
                             </tr>
                         @endif   
                     </tfoot>
                 </table>
             </div>
-            {{-- {{$purchases->links()}} --}}
         </div>
     </div>
 </div>

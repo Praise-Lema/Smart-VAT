@@ -39,18 +39,22 @@ class UserResource extends Resource
                 Forms\Components\Select::make('has_paid')->options([
                     '1' => 'Paid',
                     '0' => 'Not Paid',
-                ])->disablePlaceholderSelection(),
+                ])->default(0)->disablePlaceholderSelection(),
                 Forms\Components\Select::make('package_id')->label('Package')->options([
                     '1' => 'Basic',
                     '2' => 'Standard',
                     '3' => 'Pro', 
                     '4' => 'Premium',
-                ])->disablePlaceholderSelection(),
+                ])->disablePlaceholderSelection()->disabled(),
                 // Forms\Components\Select::make('current_company_id')->label('Current Company')->relationship('company', 'name')->disablePlaceholderSelection(),
                 Forms\Components\Select::make('reg_by_yana')->options([
                     '1' => 'Yes',
                     '0' => 'No',
                 ])->disablePlaceholderSelection()->default('1'),
+                Forms\Components\Select::make('Role')->options([
+                    1 => 'Admin',
+                    2 => 'Auditor',
+                ])->disablePlaceholderSelection(),
                 Forms\Components\Toggle::make('status')
                 ->onColor('success'),
                 // Forms\Components\FileUpload::make('company_pic'),
@@ -93,7 +97,10 @@ class UserResource extends Resource
                     1 => 'Yes',
                     0 => 'No',
                 ]),
-                // TextColumn::make('role_id'),
+                TextColumn::make('Role')->enum([
+                    1 => 'Admin',
+                    2 => 'Auditor',
+                ]),
                 TextColumn::make('package_due_date')->date(),
                 TextColumn::make('last_login_time'),
                 TextColumn::make('last_login_ip'),

@@ -34,7 +34,7 @@
                 </div>                                    
             
 
-            <div class="mt-3" style="position:absolute; right: 3%;">
+            <div class="mt-3 month-export">
                 <div class="dropdown">
                     <a class="btn btn-dark bg-gradient dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-file-export me-1"></i>Export Month Report</a>
                     <ul class="dropdown-menu">
@@ -47,6 +47,7 @@
         </form>
         </div>
 
+        {{-- Purchases Details --}}
         <div class="mb-5">
             <h3 class="text-dark text-center ">Purchase Details</h3>
             <hr style="margin: auto; width: 8%;">
@@ -62,7 +63,9 @@
                         <th>Amount Inlcusive <small>(Tshs)</small></th>
                         <th>Amount Exclusive <small>(Tshs)</small></th>
                         <th>VAT <small>(Tshs)</small></th>
-                        <th>Action</th>
+                        @if (auth()->user()->Role == 1)
+                            <th>Action</th>
+                        @endif
                     </tr>
 
                     <tbody class="table-group-divider">
@@ -77,14 +80,16 @@
                                     <td wire:model = "purchases">{{number_format($purchase->amount_inclusive,2)}}</td>
                                     <td wire:model = "purchases">{{number_format($purchase->amount_exclusive,2)}}</td>
                                     <td wire:model = "purchases">{{number_format($purchase->vat,2)}}</td>
-                                    <td class="d-flex">
-                                        <a href="/purchase/{{$purchase->id}}/edit" class="text-success"><span class="fas fa-edit"></span></a>
-                                        <form action="/purchase/{{$purchase->id}}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{method_field('DELETE')}}
-                                            <button type="submit" value="" class="fas fa-trash text-danger border-0 bg-transparent"></button>
-                                        </form>
-                                    </td>
+                                    @if (auth()->user()->Role == 1)
+                                        <td class="d-flex">
+                                            <a href="/purchase/{{$purchase->id}}/edit" class="text-success"><span class="fas fa-edit"></span></a>
+                                            <form action="/purchase/{{$purchase->id}}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{method_field('DELETE')}}
+                                                <button type="submit" value="" class="fas fa-trash text-danger border-0 bg-transparent"></button>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         @else 
@@ -97,7 +102,9 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                @if (auth()->user()->Role == 1)
+                                    <td></td>
+                                @endif
                             </tr>    
                         @endif
                     </tbody>
@@ -113,7 +120,9 @@
                             <th>{{number_format($purchases->sum('amount_inclusive'),2)}}</th>
                             <th>{{number_format($purchases->sum('amount_exclusive'),2)}}</th>
                             <th>{{number_format($purchases->sum('vat'),2)}}</th>
-                            <th></th>
+                            @if (auth()->user()->Role == 1)
+                                <th></th>
+                            @endif
                         </tr>
                         @else
                             <tr>
@@ -125,7 +134,9 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                @if (auth()->user()->Role == 1)
+                                    <td></td>
+                                @endif
                             </tr>
                         @endif   
                     </tfoot>
@@ -133,6 +144,7 @@
             </div>
         </div>        
 
+        {{-- Sales Details --}}
         <div class="my-5">
             <h3 class="text-dark text-center">Sales Details</h3>
             <hr style="margin: auto; width: 8%;">
@@ -145,7 +157,9 @@
                         <th>Total Exclusive Sales</th>
                         <th>Total Sales VAT </th>
                         <th>Month</th>
-                        <th>Action</th>
+                        @if (auth()->user()->Role == 1)
+                            <th>Action</th>
+                        @endif
                     </tr>
 
                     <tbody class="table-group-divider">
@@ -157,14 +171,16 @@
                                     <td>{{number_format($sale->total_exclusive_sales,2)}}</td>
                                     <td>{{number_format($sale->total_sales_vat,2)}}</td>
                                     <td>{{$sale->Month}}</td>
-                                    <td class="d-flex">
-                                        <a href="/sales/{{$sale->id}}/edit" class="text-success"><span class="fas fa-edit"></span></a>
-                                        <form action="sales/{{$sale->id}}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{method_field('DELETE')}}
-                                            <button type="submit" value="" class="fas fa-trash text-danger border-0 bg-transparent"></button>
-                                        </form>
-                                    </td>
+                                    @if (auth()->user()->Role == 1)
+                                        <td class="d-flex">
+                                            <a href="/sales/{{$sale->id}}/edit" class="text-success"><span class="fas fa-edit"></span></a>
+                                            <form action="sales/{{$sale->id}}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{method_field('DELETE')}}
+                                                <button type="submit" value="" class="fas fa-trash text-danger border-0 bg-transparent"></button>
+                                            </form>
+                                        </td>                                    
+                                    @endif
                                 </tr>
                             @endforeach
                         @else
@@ -174,7 +190,9 @@
                                 <td></td>
                                 <td></td>
                                 <td>{{date('F')}}</td>
-                                <td></td>
+                                @if (auth()->user()->Role == 1)
+                                    <td></td>
+                                @endif
                             </tr>
                         @endif                
                     </tbody>
@@ -182,6 +200,7 @@
             </div>
         </div>
         
+        {{-- VAT Difference Details --}}
         <div class="my-5">
             <h3 class="text-dark text-center my-2">VAT Difference Details</h3>
             <hr style="margin: auto; width: 8%;">

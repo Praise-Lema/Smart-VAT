@@ -58,21 +58,21 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex">
-                                <a href="/sales/{{$sale->id}}/edit" class="btn btn-dark bg-gradient mx-2">Edit</a>
-                                <form action="sales/{{$sale->id}}" method="POST">
-                                    {{csrf_field()}}
-                                    {{method_field('DELETE')}}
-                                    <button type="submit" class="btn btn-danger bg-gradient">Delete</button>
-                                </form>
+                                @if (auth()->user()->Role == 1)
+                                    <a href="/sales/{{$sale->id}}/edit" class="btn btn-dark bg-gradient mx-2">Edit</a>
+                                    <form action="sales/{{$sale->id}}" method="POST">
+                                        {{csrf_field()}}
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" class="btn btn-danger bg-gradient">Delete</button>
+                                    </form>     
+                                @endif
                             </div>
                         </div>  
                 @endforeach
-                
             @else
             <div class="container p-2">
                 <h3>No Sales Records Inserted</h3>
             </div>
-
             @endif
         </div>
     </div>
